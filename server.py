@@ -5,8 +5,8 @@ from background import process_image
 
 
 def run(image, view):
-    clean_img, result = process_image(image, view)
-    return clean_img, result
+    clean_img, result, ex = process_image(image, view)
+    return clean_img, result, ex
 
 
 demo = gr.Interface(
@@ -17,6 +17,7 @@ demo = gr.Interface(
     outputs = [
         gr.Image(label="Vehicle Image"),
         gr.Text(label="AI Detection Result"),
+        gr.Text(label="AI Agent Summary:")
     ],
     title="AutoAuth",
     description = "Detects tamperered images"
