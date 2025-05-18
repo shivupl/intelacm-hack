@@ -30,6 +30,7 @@ transform = transforms.Compose([
 
 
 def predict_image(img):
+
     # image = Image.open(image).convert("RGB")
     image = img.convert("RGB")
 

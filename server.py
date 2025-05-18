@@ -16,7 +16,7 @@ demo = gr.Interface(
             ],
     outputs = [
         gr.Image(label="Vehicle Image"),
-        gr.Text(label="AI Detection Result")
+        gr.Text(label="AI Detection Result"),
     ],
     title="AutoAuth",
     description = "Detects tamperered images"

@@ -4,13 +4,13 @@ import os
 import io
 from torchvision import transforms
 
+
 from model import predict_image
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)), 
     transforms.ToTensor()
 ])
-
 
 def process_image(image, view):
     image = image.convert("RGB")
