@@ -12,13 +12,20 @@ print(f"Using device: {device}")
 # loading trained model
 model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
 model.fc = nn.Linear(model.fc.in_features, 2)
-model.load_state_dict(torch.load("models/resnet18_imd2020.pth", map_location=device))
+model.load_state_dict(torch.load("models/resnet18_ai.pth", map_location=device))
 model.to(device)
 model.eval()
 
+# transform = transforms.Compose([
+#     transforms.Resize((224, 224)), 
+#     transforms.ToTensor()
+# ])
+
 transform = transforms.Compose([
-    transforms.Resize((224, 224)), #resize images to 224x224 for ResNet model
-    transforms.ToTensor()
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+                         std=[0.229, 0.224, 0.225])
 ])
 
 
