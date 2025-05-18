@@ -1,8 +1,7 @@
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader, random_split
 from torchvision import transforms, models
-import torch.optim as optim
+from PIL import Image
 import os
 
 from dataset import imageDataset
@@ -17,8 +16,28 @@ model.load_state_dict(torch.load("models/resnet18_imd2020.pth", map_location=dev
 model.to(device)
 model.eval()
 
-def detect_image(image):
-    return 1
+transform = transforms.Compose([
+    transforms.Resize((224, 224)), #resize images to 224x224 for ResNet model
+    transforms.ToTensor()
+])
 
-    
+
+def predict_image(img):
+    # image = Image.open(image).convert("RGB")
+    image = img.convert("RGB")
+
+    input = transform(image).unsqueeze(0).to(device)
+
+    with torch.no_grad():
+        out = model(input)
+
+        probs = torch.softmax(out, dim=1)[0]
+
+        label = torch.argmax(probs).item()
+
+        confidence = probs[label].item()*100
+
+    return label, round(confidence, 2)
+
+
 

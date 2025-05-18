@@ -3,13 +3,13 @@ from PIL import Image
 import os
 import io
 
-from model import detect_image
+from model import predict_image
 
 
 def process_image(image, view):
     clean_img = remove_bg(image)
 
-    label, confidence = detect_image(clean_img)
+    label, confidence = predict_image(clean_img)
 
     if label == 1:
         result = f"Detected AI-generated content:  {confidence:.2f}% confidence"
